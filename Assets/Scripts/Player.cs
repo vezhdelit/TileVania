@@ -20,21 +20,21 @@ public class Player : MonoBehaviour
     BoxCollider2D feetCollider2D;
 
     float gravityScaleAtStart;
-    float runSpeedAtStart;
 
     void Start()
     {
+        //Get References to vriables
         rb2D = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         bodyCollider2D = GetComponent<CapsuleCollider2D>();
         feetCollider2D = GetComponent<BoxCollider2D>();
         gravityScaleAtStart = rb2D.gravityScale;
-        runSpeedAtStart = runSpeed;
     }
 
     void Update()
     {
-        if(!isAlive) { return; }
+        //Stops all the player abilities
+        if(!isAlive) { return; } 
 
         Run();
         Jump();
@@ -74,14 +74,15 @@ public class Player : MonoBehaviour
         {
             anim.SetBool("Climbing", false);
             rb2D.gravityScale = gravityScaleAtStart;
-            runSpeed = runSpeedAtStart;
             return;
         }
-        runSpeed = runSpeedAtStart * 0.5f;
+
         float controlThrow = Input.GetAxis("Vertical");
         Vector2 climbVelocity = new Vector2(rb2D.velocity.x, controlThrow * climbSpeed);
         rb2D.velocity = climbVelocity;
+
         rb2D.gravityScale = 0f;
+        
         bool isPlayerClimbing = Mathf.Abs(rb2D.velocity.y) > Mathf.Epsilon;
         anim.SetBool("Climbing", isPlayerClimbing);
     }
@@ -92,7 +93,8 @@ public class Player : MonoBehaviour
             isAlive = false;
             anim.SetTrigger("Dying");
             rb2D.velocity = deathKick;
-            FindObjectOfType<GameSession>().ProcessPlayerDeath();
+
+            StartCoroutine(FindObjectOfType<GameSession>().ProcessPlayerDeath());
         }
     }
 
@@ -104,7 +106,6 @@ public class Player : MonoBehaviour
             transform.localScale = new Vector2(Mathf.Sign(rb2D.velocity.x), 1f);
         }
     }
-    
 
 }
 

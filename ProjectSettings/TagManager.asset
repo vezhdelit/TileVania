@@ -47,18 +47,21 @@ TagManager:
   - name: Ladder
     uniqueID: 1840949483
     locked: 0
-  - name: Hazards
-    uniqueID: 2319582025
-    locked: 0
   - name: Enemy
     uniqueID: 836553395
     locked: 0
   - name: Player
     uniqueID: 2320996641
     locked: 0
+  - name: Hazards
+    uniqueID: 2319582025
+    locked: 0
   - name: Interactables
     uniqueID: 2736113175
     locked: 0
   - name: Foreground
     uniqueID: 1457438107
+    locked: 0
+  - name: RisingWater
+    uniqueID: 82363391
     locked: 0

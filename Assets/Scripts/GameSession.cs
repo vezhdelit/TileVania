@@ -7,6 +7,7 @@ public class GameSession : MonoBehaviour
 {
     [SerializeField] int playerLives = 3;
     [SerializeField] int playerScore = 0;
+    [SerializeField] float levelLoadDelay = 2f;
 
     [SerializeField] Text livesText;
     [SerializeField] Text scoreText;
@@ -14,6 +15,7 @@ public class GameSession : MonoBehaviour
     void Awake()
     {
         //Singleton pattern / Has many realizations
+        //Makes only one original instance
         int numGameSessions = FindObjectsOfType<GameSession>().Length;
         if(numGameSessions > 1)
         {
@@ -29,8 +31,17 @@ public class GameSession : MonoBehaviour
         livesText.text = playerLives.ToString();
         scoreText.text = playerScore.ToString();
     }
-    public void ProcessPlayerDeath()
+    void Update()
     {
+        if(SceneManager.GetActiveScene().name == "Menu" || SceneManager.GetActiveScene().name == "Success")
+        {
+            Destroy(gameObject);
+        }
+    }
+    public IEnumerator ProcessPlayerDeath()
+    {
+        yield return new WaitForSecondsRealtime(levelLoadDelay);
+
         if(playerLives > 1)
         {
             TakeLife();
@@ -48,9 +59,10 @@ public class GameSession : MonoBehaviour
     private void TakeLife()
     {
         playerLives--;
+        livesText.text = playerLives.ToString();
+        
         var currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneIndex);
-        livesText.text = playerLives.ToString();
     }
 
     private void ResetGameSession()

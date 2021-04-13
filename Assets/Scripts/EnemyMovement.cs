@@ -5,7 +5,9 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 1f;
+    
     Rigidbody2D rb2D;
+
     void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();

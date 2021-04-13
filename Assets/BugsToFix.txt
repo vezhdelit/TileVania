@@ -1,4 +1,2 @@
 Player movement sensitivity
 add double jump
-immediate death
-GameSession doesnt destroy in MenuScenes
