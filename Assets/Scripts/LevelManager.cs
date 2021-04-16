@@ -7,6 +7,10 @@ public class LevelManager : MonoBehaviour
 {
     [SerializeField] float levelLoadDelay = 2f;
     [SerializeField] float levelSlowMo = 0.5f;     
+    private void Start()
+    {
+        Time.timeScale = 1f;
+    }
     private void OnTriggerEnter2D(Collider2D exit)
     {
         StartCoroutine(LoadNextLevel());
