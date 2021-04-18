@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Levels/Level 2.unity
     guid: 4c323b8538fbcc148ace8994faae39cb
   - enabled: 1
+    path: Assets/Levels/BounceLevel.unity
+    guid: b08e599bda4807d40b82cba4c5bf958f
+  - enabled: 1
     path: Assets/Levels/Success.unity
     guid: 54ec525c775a9b042b0dca54c9e06a83
   m_configObjects:

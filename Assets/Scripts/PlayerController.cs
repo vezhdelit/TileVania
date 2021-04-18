@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     //Config
     [SerializeField] float runSpeed = 5f;
     [SerializeField] float jumpSpeed = 5f;
+    [SerializeField] float maxSpeed = 30f;
     [SerializeField] float secondJumpSpeed = 5f;
     [SerializeField] float climbSpeed = 5f;
     [SerializeField] Vector2 deathKick = new Vector2(25f,25f);
@@ -37,8 +38,12 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-            //Stops all the player abilities
-            if (!isAlive) { return; } 
+        if (rb2D.velocity.magnitude > maxSpeed)
+        {
+            rb2D.velocity = Vector2.ClampMagnitude(rb2D.velocity, maxSpeed);
+        }
+        //Stops all the player abilities
+        if (!isAlive) { return; } 
 
         Run();
         Jump();
