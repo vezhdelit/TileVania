@@ -112,7 +112,6 @@ public class PlayerController : MonoBehaviour
             isAlive = false;
             anim.SetTrigger("Dying");
             rb2D.velocity = deathKick;
-
             StartCoroutine(FindObjectOfType<GameSession>().ProcessPlayerDeath());
         }
     }
