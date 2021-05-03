@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     bool canJump = true;
     bool canDoubleJump = true;
     //Cached component referenced
-    Rigidbody2D rb2D;
+    Rigidbody2D rb;
     Animator anim;
     CapsuleCollider2D bodyCollider2D;
     CircleCollider2D feetCollider2D;
@@ -29,18 +29,18 @@ public class PlayerController : MonoBehaviour
         Time.timeScale = 1f;
         
         //Get References to vriables
-        rb2D = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         bodyCollider2D = GetComponent<CapsuleCollider2D>();
         feetCollider2D = GetComponent<CircleCollider2D>();
-        gravityScaleAtStart = rb2D.gravityScale;
+        gravityScaleAtStart = rb.gravityScale;
     }
 
     void Update()
     {
-        if (rb2D.velocity.magnitude > maxSpeed)
+        if (rb.velocity.magnitude > maxSpeed)
         {
-            rb2D.velocity = Vector2.ClampMagnitude(rb2D.velocity, maxSpeed);
+            rb.velocity = Vector2.ClampMagnitude(rb.velocity, maxSpeed);
         }
         //Stops all the player abilities
         if (!isAlive) { return; } 
@@ -55,10 +55,10 @@ public class PlayerController : MonoBehaviour
     private void Run()
     {
         float controlThrow = Input.GetAxis("Horizontal"); //-1 to +1
-        Vector2 playerVelocity = new Vector2(controlThrow * runSpeed, rb2D.velocity.y);
-        rb2D.velocity = playerVelocity;
+        Vector2 playerVelocity = new Vector2(controlThrow * runSpeed, rb.velocity.y);
+        rb.velocity = playerVelocity;
 
-        bool isPlayerMoving = Mathf.Abs(rb2D.velocity.x) > Mathf.Epsilon;
+        bool isPlayerMoving = Mathf.Abs(rb.velocity.x) > Mathf.Epsilon;
         anim.SetBool("Running", isPlayerMoving);
 
     }
@@ -69,8 +69,8 @@ public class PlayerController : MonoBehaviour
             if(canDoubleJump && Input.GetButtonDown("Jump"))
                 {
                     Vector2 jumpVelocityToAdd = new Vector2(0f, secondJumpSpeed);
-                    rb2D.velocity = new Vector2(0,0);
-                    rb2D.velocity += jumpVelocityToAdd;
+                    rb.velocity = new Vector2(0,0);
+                    rb.velocity += jumpVelocityToAdd;
                     canDoubleJump = false;
                 }
 
@@ -82,7 +82,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButton("Jump") && canJump)
         {
             Vector2 jumpVelocityToAdd = new Vector2(0f, jumpSpeed);
-            rb2D.velocity += jumpVelocityToAdd;
+            rb.velocity += jumpVelocityToAdd;
             canJump = false;
         }
     }
@@ -91,17 +91,17 @@ public class PlayerController : MonoBehaviour
         if (!bodyCollider2D.IsTouchingLayers(LayerMask.GetMask("Ladder")))
         {
             anim.SetBool("Climbing", false);
-            rb2D.gravityScale = gravityScaleAtStart;
+            rb.gravityScale = gravityScaleAtStart;
             return;
         }
 
         float controlThrow = Input.GetAxis("Vertical");
-        Vector2 climbVelocity = new Vector2(rb2D.velocity.x, controlThrow * climbSpeed);
-        rb2D.velocity = climbVelocity;
+        Vector2 climbVelocity = new Vector2(rb.velocity.x, controlThrow * climbSpeed);
+        rb.velocity = climbVelocity;
 
-        rb2D.gravityScale = 0f;
+        rb.gravityScale = 0f;
         
-        bool isPlayerClimbing = Mathf.Abs(rb2D.velocity.y) > Mathf.Epsilon;
+        bool isPlayerClimbing = Mathf.Abs(rb.velocity.y) > Mathf.Epsilon;
         anim.SetBool("Climbing", isPlayerClimbing);
     }
     private void Die()
@@ -111,17 +111,17 @@ public class PlayerController : MonoBehaviour
         {
             isAlive = false;
             anim.SetTrigger("Dying");
-            rb2D.velocity = deathKick;
+            rb.velocity = deathKick;
             StartCoroutine(FindObjectOfType<GameSession>().ProcessPlayerDeath());
         }
     }
 
     private void FlipSprite()
     {
-        bool isPlayerMoving = Mathf.Abs(rb2D.velocity.x) > Mathf.Epsilon;
+        bool isPlayerMoving = Mathf.Abs(rb.velocity.x) > Mathf.Epsilon;
         if (isPlayerMoving)
         {
-            transform.localScale = new Vector2(Mathf.Sign(rb2D.velocity.x), 1f);
+            transform.localScale = new Vector2(Mathf.Sign(rb.velocity.x), 1f);
         }
     }
 }

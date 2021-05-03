@@ -89,7 +89,6 @@ public class PlatformController : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            print("1");
             other.gameObject.transform.parent = this.transform.transform;
         }
     }
@@ -97,7 +96,6 @@ public class PlatformController : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            print("1");
             other.gameObject.transform.parent = this.transform.transform;
         }
     }
@@ -106,7 +104,6 @@ public class PlatformController : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            print("2");
             other.gameObject.transform.parent = null;
         }
     }

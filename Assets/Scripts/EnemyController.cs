@@ -6,11 +6,11 @@ public class EnemyController : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 1f;
     
-    Rigidbody2D rb2D;
+    Rigidbody2D rb;
 
     void Start()
     {
-        rb2D = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -18,11 +18,11 @@ public class EnemyController : MonoBehaviour
     {
         if(IsFacingRight())
         {
-            rb2D.velocity = new Vector2(moveSpeed, rb2D.velocity.y);
+            rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
         }
         else
         {
-            rb2D.velocity = new Vector2(-moveSpeed, rb2D.velocity.y);
+            rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
         }
     }
     bool IsFacingRight()
@@ -31,7 +31,7 @@ public class EnemyController : MonoBehaviour
     }
     void OnTriggerExit2D(Collider2D collision)  
     {
-        transform.localScale = new Vector2(-Mathf.Sign(rb2D.velocity.x), 1f);
+        transform.localScale = new Vector2(-Mathf.Sign(rb.velocity.x), 1f);
     }   
 
 }
