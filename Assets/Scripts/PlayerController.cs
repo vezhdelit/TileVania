@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rb2D;
     Animator anim;
     CapsuleCollider2D bodyCollider2D;
-    BoxCollider2D feetCollider2D;
+    CircleCollider2D feetCollider2D;
 
     float gravityScaleAtStart;
 
@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
         rb2D = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         bodyCollider2D = GetComponent<CapsuleCollider2D>();
-        feetCollider2D = GetComponent<BoxCollider2D>();
+        feetCollider2D = GetComponent<CircleCollider2D>();
         gravityScaleAtStart = rb2D.gravityScale;
     }
 
