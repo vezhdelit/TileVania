@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2d5751a2c961df945a34295ccf5e576d, type: 3}
-  m_Name: SlimePrefabBrush
+  m_Name: EnemySlimeBrush
   m_EditorClassIdentifier: 
   m_Prefabs:
   - {fileID: 8226841373227893579, guid: f6d0050e47c9f2544a44ca5bc28dddff, type: 3}
