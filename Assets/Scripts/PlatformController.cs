@@ -84,28 +84,12 @@ public class PlatformController : MonoBehaviour
         if (angle >= 360f) { angle = 0f; }
     }
 
-
-    void OnCollisionEnter2D(Collision2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Player")
-        {
-            other.gameObject.transform.parent = this.transform.transform;
-        }
+        other.gameObject.transform.parent = this.transform.transform;
     }
-    void OnCollisionStay2D(Collision2D other)
+    void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Player")
-        {
-            other.gameObject.transform.parent = this.transform.transform;
-        }
+        other.gameObject.transform.parent = null;
     }
-
-    void OnCollisionExit2D(Collision2D other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            other.gameObject.transform.parent = null;
-        }
-    }
-
 }

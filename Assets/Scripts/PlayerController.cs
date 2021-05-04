@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] int health = 5;
+
     //Config
     [SerializeField] float runSpeed = 5f;
     [SerializeField] float jumpSpeed = 5f;
@@ -14,9 +16,12 @@ public class PlayerController : MonoBehaviour
 
     //State
     bool isAlive = true;
+    bool isHurted = false;
     bool canJump = true;
     bool canDoubleJump = true;
+
     //Cached component referenced
+    [SerializeField]  PhysicsMaterial2D mat;
     Rigidbody2D rb;
     Animator anim;
     CapsuleCollider2D bodyCollider2D;
@@ -43,7 +48,9 @@ public class PlayerController : MonoBehaviour
             rb.velocity = Vector2.ClampMagnitude(rb.velocity, maxSpeed);
         }
         //Stops all the player abilities
-        if (!isAlive) { return; } 
+        if (!isAlive) { return; }
+        if (isHurted) { return; }
+
 
         Run();
         Jump();
@@ -104,16 +111,37 @@ public class PlayerController : MonoBehaviour
         bool isPlayerClimbing = Mathf.Abs(rb.velocity.y) > Mathf.Epsilon;
         anim.SetBool("Climbing", isPlayerClimbing);
     }
+    private void Recovery()
+    {
+        isHurted = false;
+        anim.SetTrigger("Hurt");
+
+    }
     private void Die()
     {
-        if (bodyCollider2D.IsTouchingLayers(LayerMask.GetMask("Enemy", "Hazards"))
-            || feetCollider2D.IsTouchingLayers(LayerMask.GetMask("Enemy", "Hazards")))
+        if (health <= 1 && (bodyCollider2D.IsTouchingLayers(LayerMask.GetMask("Enemy", "Hazards"))
+       || feetCollider2D.IsTouchingLayers(LayerMask.GetMask("Enemy", "Hazards"))))
         {
             isAlive = false;
             anim.SetTrigger("Dying");
-            rb.velocity = deathKick;
+
+            rb.velocity += new Vector2(deathKick.x * -transform.localScale.x, deathKick.y);
+            bodyCollider2D.sharedMaterial = mat;
+            FindObjectOfType<GameSession>().TakeLife();
             StartCoroutine(FindObjectOfType<GameSession>().ProcessPlayerDeath());
         }
+        else if (!isHurted && (bodyCollider2D.IsTouchingLayers(LayerMask.GetMask("Enemy", "Hazards"))
+       || feetCollider2D.IsTouchingLayers(LayerMask.GetMask("Enemy", "Hazards"))))
+        {
+            health--;
+            isHurted = true;
+            anim.SetTrigger("Hurt");
+
+            rb.velocity += new Vector2(deathKick.x * -transform.localScale.x, deathKick.y);
+            FindObjectOfType<GameSession>().TakeLife();
+            Invoke("Recovery", 0.5f);
+        }
+
     }
 
     private void FlipSprite()

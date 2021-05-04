@@ -42,6 +42,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -152,6 +153,10 @@ PrefabInstance:
     - target: {fileID: 1316180620127485746, guid: 9689f9f6052aa8c4ea49315926082e0d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6114154703964241779, guid: 9689f9f6052aa8c4ea49315926082e0d, type: 3}
+      propertyPath: m_Size.x
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6221544331615785940, guid: 9689f9f6052aa8c4ea49315926082e0d, type: 3}
       propertyPath: m_LocalPosition.x

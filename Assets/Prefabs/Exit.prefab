@@ -44,6 +44,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -112,5 +113,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acc7e8d7daefb23449322048dc416050, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelLoadDelay: 2
-  levelSlowMo: 0.3
+  levelLoadDelay: 0.5
+  levelSlowMo: 0.5

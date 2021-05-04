@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -41,28 +41,25 @@ public class GameSession : MonoBehaviour
     public IEnumerator ProcessPlayerDeath()
     {
         yield return new WaitForSecondsRealtime(levelLoadDelay);
-
-        if(playerLives > 1)
-        {
-            TakeLife();
-        }
-        else
-        {
-            ResetGameSession();
-        }
+        ResetLevel();   
     }
     public void AddToScore(int pointsToAdd)
     {
         playerScore += pointsToAdd;
         scoreText.text = playerScore.ToString();
     }
-    private void TakeLife()
+    public void TakeLife()
     {
-        playerLives--;
-        livesText.text = playerLives.ToString();
-        
-        var currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(currentSceneIndex);
+        if (playerLives > 0)
+        {
+            playerLives--;
+            livesText.text = playerLives.ToString();
+        }
+    }
+    private void ResetLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Destroy(gameObject);
     }
 
     private void ResetGameSession()

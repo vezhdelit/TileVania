@@ -22,8 +22,8 @@ public class LevelManager : MonoBehaviour
 
         Time.timeScale = 1f;
         
-        //Destroys all the Collectables on current level
-        Destroy(FindObjectOfType<ScenePersist>().gameObject);
+        ////Destroys all the Collectables on current level
+        //Destroy(FindObjectOfType<ScenePersist>().gameObject);
 
         var currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneIndex + 1);
