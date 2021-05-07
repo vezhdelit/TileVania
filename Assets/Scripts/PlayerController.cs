@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] int health = 5;
-
     //Config
+    [SerializeField] int health = 5;
     [SerializeField] float runSpeed = 5f;
     [SerializeField] float jumpSpeed = 5f;
     [SerializeField] float maxSpeed = 30f;
@@ -21,11 +20,17 @@ public class PlayerController : MonoBehaviour
     bool canDoubleJump = true;
 
     //Cached component referenced
-    [SerializeField]  PhysicsMaterial2D mat;
     Rigidbody2D rb;
     Animator anim;
     CapsuleCollider2D bodyCollider2D;
     CircleCollider2D feetCollider2D;
+    AudioSource audioPlayer;
+
+    //Samples
+    [SerializeField]  PhysicsMaterial2D mat;
+    [SerializeField] AudioClip jumpSFX;
+    [SerializeField] AudioClip hitSFX;
+    [SerializeField] AudioClip dieSFX;
 
     float gravityScaleAtStart;
 
@@ -38,6 +43,7 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
         bodyCollider2D = GetComponent<CapsuleCollider2D>();
         feetCollider2D = GetComponent<CircleCollider2D>();
+        audioPlayer = GetComponent<AudioSource>();
         gravityScaleAtStart = rb.gravityScale;
     }
 
@@ -47,6 +53,7 @@ public class PlayerController : MonoBehaviour
         {
             rb.velocity = Vector2.ClampMagnitude(rb.velocity, maxSpeed);
         }
+
         //Stops all the player abilities
         if (!isAlive) { return; }
         if (isHurted) { return; }
@@ -71,10 +78,12 @@ public class PlayerController : MonoBehaviour
     }
     private void Jump()
     {
-        if (!feetCollider2D.IsTouchingLayers(LayerMask.GetMask("Ground"))) 
+
+        if (!feetCollider2D.IsTouchingLayers(LayerMask.GetMask("Ground") )) 
         {
             if(canDoubleJump && Input.GetButtonDown("Jump"))
                 {
+                    audioPlayer.PlayOneShot(jumpSFX);
                     Vector2 jumpVelocityToAdd = new Vector2(0f, secondJumpSpeed);
                     rb.velocity = new Vector2(0,0);
                     rb.velocity += jumpVelocityToAdd;
@@ -88,6 +97,7 @@ public class PlayerController : MonoBehaviour
         canDoubleJump = true;
         if (Input.GetButton("Jump") && canJump)
         {
+            audioPlayer.PlayOneShot(jumpSFX);
             Vector2 jumpVelocityToAdd = new Vector2(0f, jumpSpeed);
             rb.velocity += jumpVelocityToAdd;
             canJump = false;
@@ -111,18 +121,13 @@ public class PlayerController : MonoBehaviour
         bool isPlayerClimbing = Mathf.Abs(rb.velocity.y) > Mathf.Epsilon;
         anim.SetBool("Climbing", isPlayerClimbing);
     }
-    private void Recovery()
-    {
-        isHurted = false;
-        anim.SetTrigger("Hurt");
 
-    }
     private void Die()
     {
-        if (health <= 1 && (bodyCollider2D.IsTouchingLayers(LayerMask.GetMask("Enemy", "Hazards"))
-       || feetCollider2D.IsTouchingLayers(LayerMask.GetMask("Enemy", "Hazards"))))
+        if (health <= 1 && (bodyCollider2D.IsTouchingLayers(LayerMask.GetMask("Enemy", "Hazards")) || feetCollider2D.IsTouchingLayers(LayerMask.GetMask("Enemy", "Hazards"))))
         {
             isAlive = false;
+            audioPlayer.PlayOneShot(dieSFX);
             anim.SetTrigger("Dying");
 
             rb.velocity += new Vector2(deathKick.x * -transform.localScale.x, deathKick.y);
@@ -130,11 +135,11 @@ public class PlayerController : MonoBehaviour
             FindObjectOfType<GameSession>().TakeLife();
             StartCoroutine(FindObjectOfType<GameSession>().ProcessPlayerDeath());
         }
-        else if (!isHurted && (bodyCollider2D.IsTouchingLayers(LayerMask.GetMask("Enemy", "Hazards"))
-       || feetCollider2D.IsTouchingLayers(LayerMask.GetMask("Enemy", "Hazards"))))
+        else if (!isHurted && (bodyCollider2D.IsTouchingLayers(LayerMask.GetMask("Enemy", "Hazards")) || feetCollider2D.IsTouchingLayers(LayerMask.GetMask("Enemy", "Hazards"))))
         {
             health--;
             isHurted = true;
+            audioPlayer.PlayOneShot(hitSFX);
             anim.SetTrigger("Hurt");
 
             rb.velocity += new Vector2(deathKick.x * -transform.localScale.x, deathKick.y);
@@ -143,7 +148,10 @@ public class PlayerController : MonoBehaviour
         }
 
     }
-
+    private void Recovery()
+    {
+        isHurted = false;
+    }
     private void FlipSprite()
     {
         bool isPlayerMoving = Mathf.Abs(rb.velocity.x) > Mathf.Epsilon;

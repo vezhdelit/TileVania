@@ -13,6 +13,7 @@ public class LevelManager : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D exit)
     {
+        GetComponent<AudioSource>().Play();
         StartCoroutine(LoadNextLevel());
     }
     IEnumerator LoadNextLevel()
