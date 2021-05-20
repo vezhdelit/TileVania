@@ -24,7 +24,7 @@ EditorBuildSettings:
     path: Assets/Levels/ActuallyGame/SpikesAndLava.unity
     guid: 72a7fb28a0405d74cad88ba2ee8c7715
   - enabled: 1
-    path: Assets/Levels/ActuallyGame/BounceLevel 1.unity
+    path: Assets/Levels/ActuallyGame/BounceLevel.unity
     guid: 0ad0205c2c95e5545b88b93b34dab9bc
   - enabled: 1
     path: Assets/Levels/ActuallyGame/NewPlatforms.unity

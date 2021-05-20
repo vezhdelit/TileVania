@@ -29,12 +29,5 @@ public class LevelManager : MonoBehaviour
         var currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneIndex + 1);
     }
-    public void LoadFirstLevel()
-    {
-        SceneManager.LoadScene(1);
-    }
-    public void LoadMenu()
-    {
-        SceneManager.LoadScene(0);
-    }
+
 }

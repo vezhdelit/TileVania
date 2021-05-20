@@ -139,7 +139,7 @@ public class PlayerController : MonoBehaviour
         {
             health--;
             isHurted = true;
-            audioPlayer.PlayOneShot(hitSFX);
+            audioPlayer.PlayOneShot(hitSFX,5);
             anim.SetTrigger("Hurt");
 
             rb.velocity += new Vector2(deathKick.x * -transform.localScale.x, deathKick.y);
