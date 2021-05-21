@@ -1,3 +1,2 @@
 Player movement sensitivity
 Ladder problem(+-done)
-Player Slides on death(because of friction)

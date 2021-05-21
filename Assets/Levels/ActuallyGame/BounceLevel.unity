@@ -198,7 +198,7 @@ PrefabInstance:
     - target: {fileID: 8477925044723139194, guid: 31ab5df7617791542956d19815193e4c, type: 3}
       propertyPath: coinPickUpSFX
       value: 
-      objectReference: {fileID: 8300000, guid: 0a51f249c9a054242b601c2c728bf59d, type: 3}
+      objectReference: {fileID: 8300000, guid: 52633201299171d4990bacf1afbf5e85, type: 3}
     - target: {fileID: 9143076420411872824, guid: 31ab5df7617791542956d19815193e4c, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -9476,7 +9476,7 @@ PrefabInstance:
     - target: {fileID: 8477925044723139194, guid: 31ab5df7617791542956d19815193e4c, type: 3}
       propertyPath: coinPickUpSFX
       value: 
-      objectReference: {fileID: 8300000, guid: 0a51f249c9a054242b601c2c728bf59d, type: 3}
+      objectReference: {fileID: 8300000, guid: 52633201299171d4990bacf1afbf5e85, type: 3}
     - target: {fileID: 9143076420411872824, guid: 31ab5df7617791542956d19815193e4c, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -26768,7 +26768,7 @@ PrefabInstance:
     - target: {fileID: 8477925044723139194, guid: 31ab5df7617791542956d19815193e4c, type: 3}
       propertyPath: coinPickUpSFX
       value: 
-      objectReference: {fileID: 8300000, guid: 0a51f249c9a054242b601c2c728bf59d, type: 3}
+      objectReference: {fileID: 8300000, guid: 52633201299171d4990bacf1afbf5e85, type: 3}
     - target: {fileID: 9143076420411872824, guid: 31ab5df7617791542956d19815193e4c, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -27023,7 +27023,7 @@ PrefabInstance:
     - target: {fileID: 8477925044723139194, guid: 31ab5df7617791542956d19815193e4c, type: 3}
       propertyPath: coinPickUpSFX
       value: 
-      objectReference: {fileID: 8300000, guid: 0a51f249c9a054242b601c2c728bf59d, type: 3}
+      objectReference: {fileID: 8300000, guid: 52633201299171d4990bacf1afbf5e85, type: 3}
     - target: {fileID: 9143076420411872824, guid: 31ab5df7617791542956d19815193e4c, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -28339,7 +28339,7 @@ PrefabInstance:
     - target: {fileID: 8477925044723139194, guid: 31ab5df7617791542956d19815193e4c, type: 3}
       propertyPath: coinPickUpSFX
       value: 
-      objectReference: {fileID: 8300000, guid: 0a51f249c9a054242b601c2c728bf59d, type: 3}
+      objectReference: {fileID: 8300000, guid: 52633201299171d4990bacf1afbf5e85, type: 3}
     - target: {fileID: 9143076420411872824, guid: 31ab5df7617791542956d19815193e4c, type: 3}
       propertyPath: m_RootOrder
       value: 3
