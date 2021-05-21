@@ -35,5 +35,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Levels/ActuallyGame/Success.unity
     guid: 54ec525c775a9b042b0dca54c9e06a83
+  - enabled: 1
+    path: Assets/Levels/ActuallyGame/Game Over.unity
+    guid: 72647b6c54420084295aadfbe4babc77
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 6faf242e4e82fee4baa218cce7983e4e, type: 2}

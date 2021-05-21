@@ -33,7 +33,7 @@ public class GameSession : MonoBehaviour
     }
     void Update()
     {
-        if(SceneManager.GetActiveScene().name == "Menu" || SceneManager.GetActiveScene().name == "Success")
+        if(SceneManager.GetActiveScene().name == "Main Menu" || SceneManager.GetActiveScene().name == "Success" || SceneManager.GetActiveScene().name == "Game Over")
         {
             Destroy(gameObject);
         }
@@ -41,7 +41,7 @@ public class GameSession : MonoBehaviour
     public IEnumerator ProcessPlayerDeath()
     {
         yield return new WaitForSecondsRealtime(levelLoadDelay);
-        ResetLevel();   
+        GameOver();  
     }
     public void AddToScore(int pointsToAdd)
     {
@@ -61,6 +61,12 @@ public class GameSession : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Destroy(gameObject);
     }
+    private void GameOver()
+    {
+        SceneManager.LoadScene("Game Over");
+        Destroy(gameObject);
+    }
+
 
     private void ResetGameSession()
     {
